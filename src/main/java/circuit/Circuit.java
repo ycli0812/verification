@@ -1,7 +1,6 @@
 package circuit;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,14 +14,18 @@ import element.Parameter;
 import element.Resistor;
 
 public class Circuit {
-    private ArrayList<Element> elementList;
+    private final ArrayList<Element> elementList;
+
+    public Circuit() {
+        this.elementList = new ArrayList<Element>();
+    }
 
     public Circuit(String jsonStr) {
         elementList = new ArrayList<Element>();
         this.load(jsonStr);
     }
 
-    private void load(String jsonStr) {
+    public void load(String jsonStr) {
         ObjectMapper mapper = new ObjectMapper();
         // Map elementSet field to JsonNode instance
         JsonNode elements;
