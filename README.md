@@ -16,3 +16,21 @@
    - 相同的数量和类型（错误）
    - 对应元件参数相同（警告）
    - 连接等效（错误）
+
+# 类
+
+## Verifier, Pass
+
+Verifier类验证器类，需要比对的两个电路图存储在Verifier中，Pass也由Verifier执行
+
+Pass类是一个验证步骤抽象，由Pass类派生的子类包含执行某个验证步骤的具体算法，并由Verifier类调用
+
+## Circuit
+
+电路类，包含元件列表，Circuit由前端传回的JSON字符串构造
+
+## Element, Pin, Parameter
+
+Element是元件类，Pin是引脚类，一个Element中包含若干引脚，引脚中维护一个List，记录所有与之相连的引脚
+
+Parameter记录Element的一个参数，包含参数名称、值和单位
