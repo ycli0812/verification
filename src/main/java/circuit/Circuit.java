@@ -69,9 +69,6 @@ public class Circuit {
     }
 
     public Element getElement(String id) {
-        for(Element e : elementList) {
-            if(Objects.equals(e.getId(), id)) return e;
-        }
         return null;
     }
 }
