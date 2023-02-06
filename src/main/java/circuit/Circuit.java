@@ -1,18 +1,24 @@
+package circuit;
+
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import element.Element;
+import element.Parameter;
+import element.Resistor;
 
 public class Circuit {
-    private List<Element> elementList;
+    private ArrayList<Element> elementList;
 
     public Circuit(String jsonStr) {
+        elementList = new ArrayList<Element>();
         this.load(jsonStr);
     }
 
@@ -35,7 +41,7 @@ public class Circuit {
             String type = element.get("type").asText();
             int originX = element.get("x").asInt();
             int originY = element.get("y").asInt();
-            List<Parameter> features;
+            ArrayList<Parameter> features;
             try {
                 features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
             } catch (IOException e) {
@@ -60,75 +66,9 @@ public class Circuit {
     }
 
     public Element getElement(String id) {
-        // TODO return element with id given, return null if id does not exist
-
+        for(Element e : elementList) {
+            if(Objects.equals(e.getId(), id)) return e;
+        }
         return null;
-    }
-}
-
-class Pin {
-    private String id;
-    private int originX;
-    private int originY;
-    private String elementId;
-    private List<Pin> connections;
-
-    public Pin(String id) {
-        this.id = id;
-    }
-
-    public void connect(Pin p) {
-        connections.add(p);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public List<Pin> getConnections() {
-        return connections;
-    }
-}
-
-class Parameter {
-    private String name;
-    private String value;
-    private String unit;
-
-    public Parameter() {}
-
-    public Parameter(String name, String value, String unit) {
-        this.name = name;
-        this.value = value;
-        this.unit = unit;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public Boolean compareWith(Parameter p) {
-        // TODO compare tow Parameters, return true if name, value and unit are all the same
-        return true;
     }
 }

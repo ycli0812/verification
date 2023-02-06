@@ -1,14 +1,18 @@
+package element;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Element {
     protected String id;
     protected String originId;
-    protected List<Pin> pins;
-    protected List<Parameter> parameters;
+    protected ArrayList<Pin> pins;
+    protected ArrayList<Parameter> parameters;
     protected int originX;
     protected int originY;
 
-    public Element(String id, String originId, int originX, int originY, List<Parameter> features) {
+    public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features) {
+//        this.pins = new ArrayList<Pin>();
         this.id = id;
         this.originId = originId;
         this.originX = originX;
@@ -44,21 +48,4 @@ public abstract class Element {
 
     public abstract String getType();
     public abstract Boolean compareConnection(Element e); // Should be overridden by extended classes
-}
-
-class Resistor extends Element {
-    public Resistor(String id, String originId, List<Parameter> features, int originX, int originY) {
-        super(id, originId, originX, originY, features);
-        // TODO initialize pins
-    }
-
-    @Override
-    public String getType() {
-        return "resistor";
-    }
-
-    @Override
-    public Boolean compareConnection(Element e) {
-        return true;
-    }
 }
