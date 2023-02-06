@@ -13,17 +13,19 @@ public class Circuit {
     private List<Element> elementList;
 
     public Circuit(String jsonStr) {
-        try {
-            this.load(jsonStr);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        this.load(jsonStr);
     }
 
-    private void load(String jsonStr) throws IOException {
+    private void load(String jsonStr) {
         ObjectMapper mapper = new ObjectMapper();
         // Map elementSet field to JsonNode instance
-        JsonNode elements = mapper.readValue(jsonStr, JsonNode.class).get("elementSet");
+        JsonNode elements;
+        try {
+            elements = mapper.readValue(jsonStr, JsonNode.class).get("elementSet");
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return;
+        }
         Iterator<String> it = elements.fieldNames();
         int eCount = 0; // Counter for elements
         while(it.hasNext()) {
@@ -33,7 +35,13 @@ public class Circuit {
             String type = element.get("type").asText();
             int originX = element.get("x").asInt();
             int originY = element.get("y").asInt();
-            List<Parameter> features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
+            List<Parameter> features;
+            try {
+                features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
+            } catch (IOException e) {
+                System.out.println(e.toString());
+                continue;
+            }
             // Add element instance to elementList
             // Do not instantiate Element since it is an abstract class
             switch (type) {
