@@ -67,9 +67,17 @@ public class Verifier {
         try {
             res = pass.execute(this.example, this.target, this.donePasses);
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println("Verifier: " + e.toString());
             res = false;
         }
         return res;
+    }
+
+    public void summaryInfo() {
+        for(Pass p : this.passList) {
+            for(String info : p.getOutput()) {
+                System.out.println(info);
+            }
+        }
     }
 }

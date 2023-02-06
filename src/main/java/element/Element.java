@@ -37,7 +37,7 @@ public abstract class Element {
         return originId;
     }
 
-    public List<Pin> getPins() {
+    public ArrayList<Pin> getPins() {
         return pins;
     }
 
@@ -48,4 +48,14 @@ public abstract class Element {
 
     public abstract String getType();
     public abstract Boolean compareConnection(Element e); // Should be overridden by extended classes
+
+    protected abstract void analyseFeatures();
+
+    public int getOriginX() {
+        return originX;
+    }
+
+    public int getOriginY() {
+        return originY;
+    }
 }

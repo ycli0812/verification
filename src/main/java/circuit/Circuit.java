@@ -9,6 +9,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import element.Breadboard;
 import element.Element;
 import element.Parameter;
 import element.Resistor;
@@ -55,8 +56,12 @@ public class Circuit {
             // Do not instantiate Element since it is an abstract class
             switch (type) {
                 case "resistor": {
-                    System.out.println("find a resistor:" + features.toString());
-                    elementList.add(new Resistor(String.valueOf(eCount), id, features, originX, originY));
+//                    System.out.println("find a resistor:" + features.toString());
+                    this.elementList.add(new Resistor(String.valueOf(eCount), id, features, originX, originY));
+                    break;
+                }
+                case "breadboard": {
+                    this.elementList.add(new Breadboard(String.valueOf(eCount), id, features, originX, originY));
                     break;
                 }
                 default: break;
@@ -64,7 +69,7 @@ public class Circuit {
         }
     }
 
-    public List<Element> getElementList() {
+    public ArrayList<Element> getElementList() {
         return elementList;
     }
 
