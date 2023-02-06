@@ -14,6 +14,8 @@ public class UselessElementsPass extends Pass {
         this.preRequirements.add("CompilePass");
     }
 
+
+
     @Override
     public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) throws Exception {
         System.out.println("Executing " + this.id);
