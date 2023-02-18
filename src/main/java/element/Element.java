@@ -21,7 +21,11 @@ public abstract class Element {
     }
 
     public Pin getPin(String id) {
-        // TODO return the pin with given id, return null if can't find it
+        for(Pin p : this.pins) {
+            if(id.equals(p.getId())) {
+                return p;
+            }
+        }
         return null;
     }
 

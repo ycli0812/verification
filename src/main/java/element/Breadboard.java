@@ -9,7 +9,6 @@ public class Breadboard extends Element{
     public Breadboard(String id, String originId, ArrayList<Parameter> features, int originX, int originY) {
         super(id, originId, originX, originY, features);
         this.analyseFeatures();
-        // TODO initialize pins
         this.pins = new ArrayList<Pin>();
     }
 

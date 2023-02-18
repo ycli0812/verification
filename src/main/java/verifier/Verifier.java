@@ -44,6 +44,7 @@ public class Verifier {
 
     public Boolean addPass(Pass p) {
         ArrayList<String> preRequires = p.getPreRequirements();
+        // Check if all pre-requirements are satisfied
         for(String pre : preRequires) {
             boolean included = false;
             for(Pass pAdded : this.passList) {
@@ -53,7 +54,14 @@ public class Verifier {
                 }
             }
             if(!included) {
-                System.out.println("Can not add Pass " + p.getId());
+                System.out.println("Can not add Pass " + p.getId() + ", because some pre-requirements are not satisfied.");
+                return false;
+            }
+        }
+        // Check if pass has been added
+        for(Pass pAdded : this.passList) {
+            if(pAdded.getId().equals(p.getId())) {
+                System.out.println("Can not add Pass " + p.getId() + ", this pass has already been added.");
                 return false;
             }
         }
@@ -62,7 +70,6 @@ public class Verifier {
     }
 
     public Boolean execute(Pass pass) {
-        // TODO
         Boolean res;
         try {
             res = pass.execute(this.example, this.target, this.donePasses);
@@ -70,6 +77,7 @@ public class Verifier {
             System.out.println("Verifier: " + e.toString());
             res = false;
         }
+        this.donePasses.add(pass.getId());
         return res;
     }
 

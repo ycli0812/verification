@@ -45,6 +45,7 @@ public class UselessElementsPass extends Pass {
                 }
             }
         }
+        // TODO Remove useless elements from circuit
         this.addOutput("Done.", Pass.INFO);
         return true;
     }
