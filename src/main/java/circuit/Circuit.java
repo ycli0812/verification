@@ -1,6 +1,7 @@
 package circuit;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -39,28 +40,35 @@ public class Circuit {
             String type = element.get("type").asText();
             int originX = element.get("x").asInt();
             int originY = element.get("y").asInt();
-            ArrayList<Parameter> features;
 
-            JsonNode pins = element.get("pins");
-            for(JsonNode pinNode : pins) {
+            // get pins
+            JsonNode pinsNode = element.get("pins");
+            ArrayList<Pin> pins = new ArrayList<Pin>();
+            for(JsonNode pinNode : pinsNode) {
                 System.out.println(pinNode);
+                pins.add(new Pin(pinNode.get("x").asInt(), pinNode.get("y").asInt(),pinNode.get("name").asToken().asString(), id));
             }
-            try {
-                features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
-//                pins = mapper.readerFor(new TypeReference<ArrayList<Map<String, String>>>() {}).readValue(element.get("pins"));
-            } catch (IOException e) {
-                System.out.println(e.toString());
-                continue;
+
+            // get features
+            JsonNode featuresNode = element.get("features");
+            ArrayList<Parameter> features = new ArrayList<Parameter>();
+            for(JsonNode featNode : featuresNode) {
+                String name = featNode.get("name").asText();
+                String value = featNode.get("value").asText();
+                String unit = featNode.get("unit") == null ? "" : featNode.get("unit").asToken().asString();
+//                String unit = featNode.get("unit").asText("");
+                features.add(new Parameter(name, value, unit));
             }
+
             // Add element instance to elementList
             // Do not instantiate Element since it is an abstract class
             switch (type) {
                 case "resistor": {
-                    this.elementList.add(new Resistor(String.valueOf(eCount), id, features, originX, originY));
+                    this.elementList.add(new Resistor(String.valueOf(eCount), id, originX, originY, features, pins));
                     break;
                 }
                 case "breadboard": {
-                    this.elementList.add(new Breadboard(String.valueOf(eCount), id, features, originX, originY));
+                    this.elementList.add(new Breadboard(String.valueOf(eCount), id, originX, originY, features, pins));
                     break;
                 }
                 default: break;

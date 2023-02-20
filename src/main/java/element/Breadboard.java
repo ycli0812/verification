@@ -6,8 +6,8 @@ public class Breadboard extends Element{
     private int columns;
     private boolean extended;
 
-    public Breadboard(String id, String originId, ArrayList<Parameter> features, int originX, int originY) {
-        super(id, originId, originX, originY, features);
+    public Breadboard(String id, String originId, int originX, int originY, ArrayList<Parameter> features, ArrayList<Pin> pins) {
+        super(id, originId, originX, originY, features, pins);
         this.analyseFeatures();
         this.pins = new ArrayList<Pin>();
     }

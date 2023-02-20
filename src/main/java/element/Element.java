@@ -11,8 +11,8 @@ public abstract class Element {
     protected int originX;
     protected int originY;
 
-    public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features) {
-//        this.pins = new ArrayList<Pin>();
+    public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features, ArrayList<Pin> pins) {
+        this.pins = pins;
         this.id = id;
         this.originId = originId;
         this.originX = originX;

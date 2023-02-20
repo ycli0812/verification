@@ -16,7 +16,6 @@ public class UselessElementsPass extends Pass {
         // Set id
         this.id = "UselessElementsPass";
         // Set pre-requirements
-//        this.preRequirements.add("CompilePass");
     }
 
     private Breadboard findBreadboard(Circuit circuit) {
@@ -33,7 +32,7 @@ public class UselessElementsPass extends Pass {
     @Override
     public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) {
         System.out.println("Executing " + this.id);
-        
+
         Breadboard bd = this.findBreadboard(target);
 
         // Find breadboard
