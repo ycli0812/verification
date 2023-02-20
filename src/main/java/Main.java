@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
         Verifier v = new Verifier();
-        v.updateTarget("{\"elementSet\":{\"resistor1\":{\"x\":13,\"y\":7,\"type\":\"resistor\",\"features\":[{\"name\":\"resistance\",\"value\":1,\"unit\":\"kom\"},{\"name\":\"tolerance\",\"value\":\"0.05%\"}]},\"resistor0\":{\"x\":1,\"y\":5,\"type\":\"resistor\",\"features\":[{\"name\":\"resistance\",\"value\":90,\"unit\":\"om\"},{\"name\":\"tolerance\",\"value\":\"2%\"}]},\"capacitor0\":{\"x\":6,\"y\":4,\"type\":\"capacitor\",\"features\":[{\"name\":\"capacity\",\"value\":1,\"unit\":\"f\"}]},\"breadboard0\":{\"x\":4,\"y\":5,\"type\":\"breadboard\",\"features\":[{\"name\":\"column\",\"value\":40},{\"name\":\"extended\",\"value\":true}]}},\"connection\":[]}");
+        v.updateTarget("{\"elementSet\":{\"breadboard0\":{\"id\":\"breadboard0\",\"x\":0,\"y\":-3,\"type\":\"breadboard\",\"pins\":[],\"features\":[{\"name\":\"column\",\"value\":15},{\"name\":\"extended\",\"value\":false}]},\"resistor0\":{\"id\":\"resistor0\",\"x\":1,\"y\":1,\"type\":\"resistor\",\"pins\":[{\"name\":\"start\",\"x\":1,\"y\":1},{\"name\":\"end\",\"x\":10,\"y\":1}],\"features\":[{\"name\":\"resistance\",\"value\":1,\"unit\":\"om\"},{\"name\":\"tolerance\",\"value\":\"1%\"}]}}}");
         UselessElementsPass p = new UselessElementsPass();
         v.addPass(p);
         v.addPass(p);

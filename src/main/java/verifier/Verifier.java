@@ -16,6 +16,7 @@ public class Verifier {
         this.example.load(example);
         this.target.load(target);
     }
+
     public Verifier() {
         this.example = new Circuit();
         this.target = new Circuit();

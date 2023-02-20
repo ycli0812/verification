@@ -1,18 +1,12 @@
 package circuit;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import element.Breadboard;
-import element.Element;
-import element.Parameter;
-import element.Resistor;
+import element.*;
 
 public class Circuit {
     private final ArrayList<Element> elementList;
@@ -46,8 +40,14 @@ public class Circuit {
             int originX = element.get("x").asInt();
             int originY = element.get("y").asInt();
             ArrayList<Parameter> features;
+
+            JsonNode pins = element.get("pins");
+            for(JsonNode pinNode : pins) {
+                System.out.println(pinNode);
+            }
             try {
                 features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
+//                pins = mapper.readerFor(new TypeReference<ArrayList<Map<String, String>>>() {}).readValue(element.get("pins"));
             } catch (IOException e) {
                 System.out.println(e.toString());
                 continue;
@@ -56,7 +56,6 @@ public class Circuit {
             // Do not instantiate Element since it is an abstract class
             switch (type) {
                 case "resistor": {
-//                    System.out.println("find a resistor:" + features.toString());
                     this.elementList.add(new Resistor(String.valueOf(eCount), id, features, originX, originY));
                     break;
                 }
