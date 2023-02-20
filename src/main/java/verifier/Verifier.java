@@ -1,13 +1,14 @@
 package verifier;
 
 import circuit.Circuit;
+import info.Info;
 import pass.Pass;
 
 import java.util.ArrayList;
 
 public class Verifier {
     private Circuit example, target;
-    private ArrayList<String> output;
+    private ArrayList<Info> output;
     private ArrayList<Pass> passList;
     private ArrayList<String> donePasses;
 
@@ -20,7 +21,7 @@ public class Verifier {
     public Verifier() {
         this.example = new Circuit();
         this.target = new Circuit();
-        this.output = new ArrayList<String>();
+        this.output = new ArrayList<Info>();
         this.passList = new ArrayList<Pass>();
         this.donePasses = new ArrayList<String>();
     }
@@ -83,9 +84,13 @@ public class Verifier {
     }
 
     public void summaryInfo() {
+        for(Info info : this.output) {
+            System.out.println(info.toString());
+        }
+
         for(Pass p : this.passList) {
-            for(String info : p.getOutput()) {
-                System.out.println(info);
+            for(Info info : p.getOutput()) {
+                System.out.println(info.toString());
             }
         }
     }

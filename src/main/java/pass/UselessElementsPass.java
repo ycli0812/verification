@@ -4,6 +4,8 @@ import circuit.Circuit;
 import element.Breadboard;
 import element.Element;
 import element.Pin;
+import info.Info;
+import info.InfoType;
 
 import java.util.ArrayList;
 
@@ -29,24 +31,27 @@ public class UselessElementsPass extends Pass {
     }
 
     @Override
-    public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) throws Exception {
+    public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) {
         System.out.println("Executing " + this.id);
+        
         Breadboard bd = this.findBreadboard(target);
+
         // Find breadboard
         if(bd == null) {
-            this.addOutput("No breadboard found.", Pass.ERROR);
+            this.addOutput(new Info("No breadboard.", InfoType.WARNING));
             return false;
         }
+
         // Check all the elements
         for (Element e : target.getElementList()) {
             for(Pin pin : e.getPins()) {
                 if(!bd.isOnBreadboard(pin.getOriginX(), pin.getOriginY())) {
-                    this.addOutput(String.format("Pin (%d, %d) of element %s is not on breadboard (%d, %d).", pin.getOriginX(), pin.getOriginY(), e.getOriginId(), bd.getOriginX(), bd.getOriginY()) , Pass.WARNING);
+                    this.addOutput(new Info("Element not on breadboard.", InfoType.WARNING, e.getOriginId()));
                 }
             }
         }
         // TODO Remove useless elements from circuit
-        this.addOutput("Done.", Pass.INFO);
+        this.addOutput(new Info("UselessElementsPass completed.", InfoType.INFO));
         return true;
     }
 }

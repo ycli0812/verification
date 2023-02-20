@@ -13,7 +13,7 @@ public class Main {
         v.updateTarget("{\"elementSet\":{\"breadboard0\":{\"id\":\"breadboard0\",\"x\":0,\"y\":-3,\"type\":\"breadboard\",\"pins\":[],\"features\":[{\"name\":\"column\",\"value\":15},{\"name\":\"extended\",\"value\":false}]},\"resistor0\":{\"id\":\"resistor0\",\"x\":1,\"y\":1,\"type\":\"resistor\",\"pins\":[{\"name\":\"start\",\"x\":1,\"y\":1},{\"name\":\"end\",\"x\":10,\"y\":1}],\"features\":[{\"name\":\"resistance\",\"value\":1,\"unit\":\"om\"},{\"name\":\"tolerance\",\"value\":\"1%\"}]}}}");
         UselessElementsPass p = new UselessElementsPass();
         v.addPass(p);
-        v.addPass(p);
+//        v.addPass(p);
         v.executeAllPasses();
         v.summaryInfo();
 

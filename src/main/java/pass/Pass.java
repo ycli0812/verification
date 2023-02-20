@@ -1,13 +1,14 @@
 package pass;
 
 import circuit.Circuit;
+import info.Info;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pass {
     protected String id;
-    protected ArrayList<String> output;
+    protected ArrayList<Info> output;
     protected ArrayList<String> preRequirements;
 
     static final int INFO = 0;
@@ -15,7 +16,7 @@ public abstract class Pass {
     static final int ERROR = 2;
 
     public Pass() {
-        this.output = new ArrayList<String>();
+        this.output = new ArrayList<Info>();
         this.preRequirements = new ArrayList<String>();
     }
 
@@ -32,7 +33,7 @@ public abstract class Pass {
         return id;
     }
 
-    public ArrayList<String> getOutput() {
+    public ArrayList<Info> getOutput() {
         return output;
     }
 
@@ -40,26 +41,27 @@ public abstract class Pass {
         return preRequirements;
     }
 
-    protected void addOutput(String info, int type) {
-        String typeStr;
-        switch (type) {
-            case Pass.INFO: {
-                typeStr = "[Info]";
-                break;
-            }
-            case Pass.WARNING: {
-                typeStr = "[Warning]";
-                break;
-            }
-            case Pass.ERROR: {
-                typeStr = "[Error]";
-                break;
-            }
-            default: {
-                typeStr = "[Unknown]";
-                break;
-            }
-        }
-        this.output.add(typeStr + " " + "In " + this.id + ": " + info);
+    protected void addOutput(Info info) {
+        this.output.add(info);
+//        String typeStr;
+//        switch (type) {
+//            case Pass.INFO: {
+//                typeStr = "[Info]";
+//                break;
+//            }
+//            case Pass.WARNING: {
+//                typeStr = "[Warning]";
+//                break;
+//            }
+//            case Pass.ERROR: {
+//                typeStr = "[Error]";
+//                break;
+//            }
+//            default: {
+//                typeStr = "[Unknown]";
+//                break;
+//            }
+//        }
+//        this.output.add(typeStr + " " + "In " + this.id + ": " + info);
     }
 }
