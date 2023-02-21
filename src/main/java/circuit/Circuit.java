@@ -45,8 +45,7 @@ public class Circuit {
             JsonNode pinsNode = element.get("pins");
             ArrayList<Pin> pins = new ArrayList<Pin>();
             for(JsonNode pinNode : pinsNode) {
-                System.out.println(pinNode);
-                pins.add(new Pin(pinNode.get("x").asInt(), pinNode.get("y").asInt(),pinNode.get("name").asToken().asString(), id));
+                pins.add(new Pin(pinNode.get("x").asInt(), pinNode.get("y").asInt(),pinNode.get("name").asText(), id));
             }
 
             // get features
@@ -56,12 +55,11 @@ public class Circuit {
                 String name = featNode.get("name").asText();
                 String value = featNode.get("value").asText();
                 String unit = featNode.get("unit") == null ? "" : featNode.get("unit").asToken().asString();
-//                String unit = featNode.get("unit").asText("");
                 features.add(new Parameter(name, value, unit));
             }
 
             // Add element instance to elementList
-            // Do not instantiate Element since it is an abstract class
+            // Do not instantiate Element class since it is an abstract class
             switch (type) {
                 case "resistor": {
                     this.elementList.add(new Resistor(String.valueOf(eCount), id, originX, originY, features, pins));

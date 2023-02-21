@@ -42,6 +42,10 @@ public class Breadboard extends Element{
     public Boolean isOnBreadboard(int x, int y) {
         int dx = x - this.originX;
         int dy = y - this.originY;
-        return ((dy > 0 && dy < 6) || (dy > 6 && dy < 11)) && (dx > 0 && dx < this.columns);
+        if(this.extended) {
+            return ((dy > 0 && dy < 3) || (dy > 3 && dy < 9) || (dy > 9 && dy < 15) || (dy > 15 && dy < 18)) && (dx > 0 && dx <= this.columns);
+        } else {
+            return ((dy > 4 && dy < 10) || (dy > 10 && dy < 15)) && (dx > 0 && dx <= this.columns);
+        }
     }
 }

@@ -2,6 +2,7 @@ package verifier;
 
 import circuit.Circuit;
 import info.Info;
+import info.InfoType;
 import pass.Pass;
 
 import java.util.ArrayList;
@@ -75,11 +76,12 @@ public class Verifier {
         Boolean res;
         try {
             res = pass.execute(this.example, this.target, this.donePasses);
+            if(res) this.donePasses.add(pass.getId());
         } catch (Exception e) {
-            System.out.println("Verifier: " + e.toString());
             res = false;
+        } finally {
+            this.output.addAll(pass.getOutput());
         }
-        this.donePasses.add(pass.getId());
         return res;
     }
 
@@ -88,10 +90,10 @@ public class Verifier {
             System.out.println(info.toString());
         }
 
-        for(Pass p : this.passList) {
-            for(Info info : p.getOutput()) {
-                System.out.println(info.toString());
-            }
-        }
+//        for(Pass p : this.passList) {
+//            for(Info info : p.getOutput()) {
+//                System.out.println(info.toString());
+//            }
+//        }
     }
 }

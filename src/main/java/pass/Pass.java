@@ -43,25 +43,5 @@ public abstract class Pass {
 
     protected void addOutput(Info info) {
         this.output.add(info);
-//        String typeStr;
-//        switch (type) {
-//            case Pass.INFO: {
-//                typeStr = "[Info]";
-//                break;
-//            }
-//            case Pass.WARNING: {
-//                typeStr = "[Warning]";
-//                break;
-//            }
-//            case Pass.ERROR: {
-//                typeStr = "[Error]";
-//                break;
-//            }
-//            default: {
-//                typeStr = "[Unknown]";
-//                break;
-//            }
-//        }
-//        this.output.add(typeStr + " " + "In " + this.id + ": " + info);
     }
 }

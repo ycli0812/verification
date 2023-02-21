@@ -2,6 +2,7 @@ package info;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,6 +15,7 @@ public class Info {
 
     public Info(InfoType type, String ...elements) {
 //        this.formatString = text;
+        this.involvedElementIds = new ArrayList<String>();
         this.type = type;
         for(String id : elements) {
             this.involvedElementIds.add(id);

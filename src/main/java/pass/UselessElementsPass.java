@@ -31,7 +31,7 @@ public class UselessElementsPass extends Pass {
 
     @Override
     public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) {
-        System.out.println("Executing " + this.id);
+        this.output.add(new Info("Start executing " + this.id + ".", InfoType.INFO));
 
         Breadboard bd = this.findBreadboard(target);
 
@@ -43,14 +43,17 @@ public class UselessElementsPass extends Pass {
 
         // Check all the elements
         for (Element e : target.getElementList()) {
+            System.out.println(e.getOriginId());
             for(Pin pin : e.getPins()) {
+                System.out.printf("pin %s, %d, %d%n", pin.getId(), pin.getOriginX(), pin.getOriginY());
                 if(!bd.isOnBreadboard(pin.getOriginX(), pin.getOriginY())) {
+//                    System.out.printf("pin %d, %d%n", pin.getOriginX(), pin.getOriginY());
                     this.addOutput(new Info("Element not on breadboard.", InfoType.WARNING, e.getOriginId()));
                 }
             }
         }
         // TODO Remove useless elements from circuit
-        this.addOutput(new Info("UselessElementsPass completed.", InfoType.INFO));
+        this.addOutput(new Info(this.id + " completed.", InfoType.INFO));
         return true;
     }
 }

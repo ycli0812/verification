@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
         Verifier v = new Verifier();
-        v.updateTarget("{\"elementSet\":{\"breadboard0\":{\"id\":\"breadboard0\",\"x\":0,\"y\":-3,\"type\":\"breadboard\",\"pins\":[],\"features\":[{\"name\":\"column\",\"value\":15},{\"name\":\"extended\",\"value\":false}]},\"resistor0\":{\"id\":\"resistor0\",\"x\":1,\"y\":1,\"type\":\"resistor\",\"pins\":[{\"name\":\"start\",\"x\":1,\"y\":1},{\"name\":\"end\",\"x\":10,\"y\":1}],\"features\":[{\"name\":\"resistance\",\"value\":1,\"unit\":\"om\"},{\"name\":\"tolerance\",\"value\":\"1%\"}]}}}");
+        v.updateTarget("{\"elementSet\":{\"breadboard0\":{\"id\":\"breadboard0\",\"x\":0,\"y\":0,\"type\":\"breadboard\",\"pins\":[],\"features\":[{\"name\":\"column\",\"value\":15},{\"name\":\"extended\",\"value\":true}]},\"resistor0\":{\"id\":\"resistor0\",\"x\":18,\"y\":6,\"type\":\"resistor\",\"pins\":[{\"name\":\"start\",\"x\":18,\"y\":6},{\"name\":\"end\",\"x\":27,\"y\":6}],\"features\":[{\"name\":\"resistance\",\"value\":1,\"unit\":\"om\"},{\"name\":\"tolerance\",\"value\":\"1%\"}]}}}");
         UselessElementsPass p = new UselessElementsPass();
         v.addPass(p);
 //        v.addPass(p);
