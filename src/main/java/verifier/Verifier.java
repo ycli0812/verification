@@ -39,9 +39,15 @@ public class Verifier {
 
     public Boolean executeAllPasses() {
         for(Pass p : this.passList) {
-            boolean res = this.execute(p);
-            if(!res) return false;
+            this.output.add(new Info("Execute " + p.getId() + ".", InfoType.INFO));
+            if(!this.execute(p)) {
+                this.output.add(new Info("Verification aborted.", InfoType.ERROR));
+                return false;
+            } else {
+                this.output.add(new Info("Pass " + p.getId() + " completed.", InfoType.INFO));
+            }
         }
+        this.output.add(new Info("Verification done.", InfoType.INFO));
         return true;
     }
 
