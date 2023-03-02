@@ -11,10 +11,6 @@ public abstract class Pass {
     protected ArrayList<Info> output;
     protected ArrayList<String> preRequirements;
 
-    static final int INFO = 0;
-    static final int WARNING = 1;
-    static final int ERROR = 2;
-
     public Pass() {
         this.output = new ArrayList<Info>();
         this.preRequirements = new ArrayList<String>();

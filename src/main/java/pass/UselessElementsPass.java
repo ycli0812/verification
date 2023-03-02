@@ -31,7 +31,10 @@ public class UselessElementsPass extends Pass {
 
     @Override
     public Boolean execute(Circuit example, Circuit target, ArrayList<String> donePasses) {
-        this.output.add(new Info("Start executing " + this.id + ".", InfoType.INFO));
+        if(!this.checkPreRequirements(donePasses)) {
+            this.addOutput(new Info("Pre-requirements not satisfied.", InfoType.ERROR));
+            return false;
+        }
 
         Breadboard bd = this.findBreadboard(target);
 
@@ -42,18 +45,16 @@ public class UselessElementsPass extends Pass {
         }
 
         // Check all the elements
-        for (Element e : target.getElementList()) {
-            System.out.println(e.getOriginId());
+        for (int i=0; i< target.getElementList().size(); i++) {
+            Element e = target.getElementList().get(i);
             for(Pin pin : e.getPins()) {
-                System.out.printf("pin %s, %d, %d%n", pin.getId(), pin.getOriginX(), pin.getOriginY());
                 if(!bd.isOnBreadboard(pin.getOriginX(), pin.getOriginY())) {
-//                    System.out.printf("pin %d, %d%n", pin.getOriginX(), pin.getOriginY());
                     this.addOutput(new Info("Element not on breadboard.", InfoType.WARNING, e.getOriginId()));
+                    target.getElementList().remove(i);
+                    break;
                 }
             }
         }
-        // TODO Remove useless elements from circuit
-        this.addOutput(new Info(this.id + " completed.", InfoType.INFO));
         return true;
     }
 }
