@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Resistor extends Element {
-    public Resistor(String id, String originId, ArrayList<Parameter> features, int originX, int originY) {
-        super(id, originId, originX, originY, features);
-        // TODO initialize pins
+    public Resistor(String id, String originId, int originX, int originY, ArrayList<Parameter> features, ArrayList<Pin> pins) {
+        super(id, originId, originX, originY, features, pins);
     }
 
     @Override
@@ -17,5 +16,10 @@ public class Resistor extends Element {
     @Override
     public Boolean compareConnection(Element e) {
         return true;
+    }
+
+    @Override
+    protected void analyseFeatures() {
+
     }
 }

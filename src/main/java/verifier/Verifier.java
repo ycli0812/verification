@@ -1,13 +1,15 @@
 package verifier;
 
 import circuit.Circuit;
+import info.Info;
+import info.InfoType;
 import pass.Pass;
 
 import java.util.ArrayList;
 
 public class Verifier {
     private Circuit example, target;
-    private ArrayList<String> output;
+    private ArrayList<Info> output;
     private ArrayList<Pass> passList;
     private ArrayList<String> donePasses;
 
@@ -16,10 +18,11 @@ public class Verifier {
         this.example.load(example);
         this.target.load(target);
     }
+
     public Verifier() {
         this.example = new Circuit();
         this.target = new Circuit();
-        this.output = new ArrayList<String>();
+        this.output = new ArrayList<Info>();
         this.passList = new ArrayList<Pass>();
         this.donePasses = new ArrayList<String>();
     }
@@ -44,6 +47,7 @@ public class Verifier {
 
     public Boolean addPass(Pass p) {
         ArrayList<String> preRequires = p.getPreRequirements();
+        // Check if all pre-requirements are satisfied
         for(String pre : preRequires) {
             boolean included = false;
             for(Pass pAdded : this.passList) {
@@ -53,7 +57,14 @@ public class Verifier {
                 }
             }
             if(!included) {
-                System.out.println("Can not add Pass " + p.getId());
+                System.out.println("Can not add Pass " + p.getId() + ", because some pre-requirements are not satisfied.");
+                return false;
+            }
+        }
+        // Check if pass has been added
+        for(Pass pAdded : this.passList) {
+            if(pAdded.getId().equals(p.getId())) {
+                System.out.println("Can not add Pass " + p.getId() + ", this pass has already been added.");
                 return false;
             }
         }
@@ -62,14 +73,27 @@ public class Verifier {
     }
 
     public Boolean execute(Pass pass) {
-        // TODO
         Boolean res;
         try {
             res = pass.execute(this.example, this.target, this.donePasses);
+            if(res) this.donePasses.add(pass.getId());
         } catch (Exception e) {
-            System.out.println(e.toString());
             res = false;
+        } finally {
+            this.output.addAll(pass.getOutput());
         }
         return res;
+    }
+
+    public void summaryInfo() {
+        for(Info info : this.output) {
+            System.out.println(info.toString());
+        }
+
+//        for(Pass p : this.passList) {
+//            for(Info info : p.getOutput()) {
+//                System.out.println(info.toString());
+//            }
+//        }
     }
 }

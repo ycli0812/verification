@@ -11,8 +11,8 @@ public abstract class Element {
     protected int originX;
     protected int originY;
 
-    public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features) {
-//        this.pins = new ArrayList<Pin>();
+    public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features, ArrayList<Pin> pins) {
+        this.pins = pins;
         this.id = id;
         this.originId = originId;
         this.originX = originX;
@@ -21,7 +21,11 @@ public abstract class Element {
     }
 
     public Pin getPin(String id) {
-        // TODO return the pin with given id, return null if can't find it
+        for(Pin p : this.pins) {
+            if(id.equals(p.getId())) {
+                return p;
+            }
+        }
         return null;
     }
 
@@ -37,7 +41,7 @@ public abstract class Element {
         return originId;
     }
 
-    public List<Pin> getPins() {
+    public ArrayList<Pin> getPins() {
         return pins;
     }
 
@@ -48,4 +52,14 @@ public abstract class Element {
 
     public abstract String getType();
     public abstract Boolean compareConnection(Element e); // Should be overridden by extended classes
+
+    protected abstract void analyseFeatures();
+
+    public int getOriginX() {
+        return originX;
+    }
+
+    public int getOriginY() {
+        return originY;
+    }
 }

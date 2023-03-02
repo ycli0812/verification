@@ -1,17 +1,13 @@
 package circuit;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.sql.Array;
+import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import element.Element;
-import element.Parameter;
-import element.Resistor;
+import element.*;
 
 public class Circuit {
     private final ArrayList<Element> elementList;
@@ -44,19 +40,33 @@ public class Circuit {
             String type = element.get("type").asText();
             int originX = element.get("x").asInt();
             int originY = element.get("y").asInt();
-            ArrayList<Parameter> features;
-            try {
-                features = mapper.readerFor(new TypeReference<List<Parameter>>() {}).readValue(element.get("features"));
-            } catch (IOException e) {
-                System.out.println(e.toString());
-                continue;
+
+            // get pins
+            JsonNode pinsNode = element.get("pins");
+            ArrayList<Pin> pins = new ArrayList<Pin>();
+            for(JsonNode pinNode : pinsNode) {
+                pins.add(new Pin(pinNode.get("x").asInt(), pinNode.get("y").asInt(),pinNode.get("name").asText(), id));
             }
+
+            // get features
+            JsonNode featuresNode = element.get("features");
+            ArrayList<Parameter> features = new ArrayList<Parameter>();
+            for(JsonNode featNode : featuresNode) {
+                String name = featNode.get("name").asText();
+                String value = featNode.get("value").asText();
+                String unit = featNode.get("unit") == null ? "" : featNode.get("unit").asToken().asString();
+                features.add(new Parameter(name, value, unit));
+            }
+
             // Add element instance to elementList
-            // Do not instantiate Element since it is an abstract class
+            // Do not instantiate Element class since it is an abstract class
             switch (type) {
                 case "resistor": {
-                    System.out.println("find a resistor:" + features.toString());
-                    elementList.add(new Resistor(String.valueOf(eCount), id, features, originX, originY));
+                    this.elementList.add(new Resistor(String.valueOf(eCount), id, originX, originY, features, pins));
+                    break;
+                }
+                case "breadboard": {
+                    this.elementList.add(new Breadboard(String.valueOf(eCount), id, originX, originY, features, pins));
                     break;
                 }
                 default: break;
@@ -64,7 +74,7 @@ public class Circuit {
         }
     }
 
-    public List<Element> getElementList() {
+    public ArrayList<Element> getElementList() {
         return elementList;
     }
 
