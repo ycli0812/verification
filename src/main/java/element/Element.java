@@ -51,6 +51,7 @@ public abstract class Element {
     }
 
     public abstract String getType();
+
     public abstract Boolean compareConnection(Element e); // Should be overridden by extended classes
 
     protected abstract void analyseFeatures();
@@ -62,4 +63,6 @@ public abstract class Element {
     public int getOriginY() {
         return originY;
     }
+
+//    public int getParameterAsInt(String name) {}
 }

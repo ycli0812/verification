@@ -88,6 +88,8 @@ public class Verifier {
         } finally {
             this.output.addAll(pass.getOutput());
         }
+//        res = pass.execute(this.example, this.target, this.donePasses);
+//        if(res) this.donePasses.add(pass.getId());
         return res;
     }
 

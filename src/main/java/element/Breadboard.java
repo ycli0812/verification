@@ -45,7 +45,30 @@ public class Breadboard extends Element{
         if(this.extended) {
             return ((dy > 0 && dy < 3) || (dy > 3 && dy < 9) || (dy > 9 && dy < 15) || (dy > 15 && dy < 18)) && (dx > 0 && dx <= this.columns);
         } else {
-            return ((dy > 4 && dy < 10) || (dy > 10 && dy < 15)) && (dx > 0 && dx <= this.columns);
+            return ((dy > 3 && dy < 9) || (dy > 9 && dy < 15)) && (dx > 0 && dx <= this.columns);
         }
+    }
+
+    public String area(int x, int y) {
+        int dx = x - this.originX;
+        int dy = y - this.originY;
+        if(!(dx > 0 && dx <= this.columns)) {
+            return "outside";
+        }
+        if(dy > 3 && dy < 9) {
+            return "upBoard";
+        }
+        if(dy > 9 && dy < 15) {
+            return "downBoard";
+        }
+        if(this.extended) {
+            if(dy > 0 && dy < 3) {
+                return "upSide";
+            }
+            if(dy > 15 && dy < 18) {
+                return "downSide";
+            }
+        }
+        return "outside";
     }
 }

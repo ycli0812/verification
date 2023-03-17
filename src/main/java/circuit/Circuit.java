@@ -69,6 +69,10 @@ public class Circuit {
                     this.elementList.add(new Breadboard(String.valueOf(eCount), id, originX, originY, features, pins));
                     break;
                 }
+                case "wire": {
+                    this.elementList.add(new Wire(String.valueOf(eCount), id, originX, originY, features, pins));
+                    break;
+                }
                 default: break;
             }
         }

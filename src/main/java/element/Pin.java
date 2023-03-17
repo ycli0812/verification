@@ -19,6 +19,7 @@ public class Pin {
         this.originX = originX;
         this.originY = originY;
         this.elementId = elementId;
+        this.connections = new ArrayList<Pin>();
     }
 
     public void connect(Pin p) {

@@ -7,7 +7,9 @@ import element.Pin;
 import info.Info;
 import info.InfoType;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UselessElementsPass extends Pass {
     public UselessElementsPass() {

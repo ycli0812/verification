@@ -38,7 +38,7 @@ public class Parameter {
     }
 
     public Boolean compareWith(Parameter p) {
-        // TODO compare tow Parameters, return true if name, value and unit are all the same
+        // TODO compare two Parameters, return true if name, value and unit are all the same
         return true;
     }
 }
