@@ -1,13 +1,30 @@
 package element;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Pin of an element.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class Pin {
-    private String id;
+    /**
+     * ID(name, more strictly) of the pin. Different instances of one type of element have pins with same IDs. IDs of
+     * all pins under one type of element should be unique.
+     */
+    private final String id;
     private int originX;
     private int originY;
+
+    /**
+     * Which element this pin belongs to.
+     */
     private String elementId;
+
+    /**
+     * List of pins connected to this pin.
+     */
     private ArrayList<Pin> connections;
 
     public Pin(String id) {
@@ -22,6 +39,10 @@ public class Pin {
         this.connections = new ArrayList<Pin>();
     }
 
+    /**
+     * Connect a pin to this pin.
+     * @param p Pin to connect
+     */
     public void connect(Pin p) {
         connections.add(p);
     }

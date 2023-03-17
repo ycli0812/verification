@@ -7,6 +7,12 @@ import pass.Pass;
 
 import java.util.ArrayList;
 
+/**
+ * Manager of the whole verification process.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class Verifier {
     private Circuit example, target;
     private ArrayList<Info> output;

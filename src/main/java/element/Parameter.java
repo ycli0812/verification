@@ -1,8 +1,27 @@
 package element;
 
+/**
+ * Feature of an element.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class Parameter {
+    /**
+     * Name of the feature.
+     */
     private String name;
+
+    /**
+     * Value of the feature. All types of the element features will be parsed into strings to get rid of possible bugs
+     * and to make the code simpler. These string values should be parsed into various types in {@code analyseFeatures}
+     * method in element classes.
+     */
     private String value;
+
+    /**
+     * Unit of the feature.
+     */
     private String unit;
 
     public Parameter() {}
@@ -37,6 +56,13 @@ public class Parameter {
         this.unit = unit;
     }
 
+    /**
+     * Check if two features are the same.
+     *
+     * @param p Another feature to compare
+     * @return If they are the same
+     * @deprecated Maybe we should override {@code equals} method.
+     */
     public Boolean compareWith(Parameter p) {
         // TODO compare two Parameters, return true if name, value and unit are all the same
         return true;
