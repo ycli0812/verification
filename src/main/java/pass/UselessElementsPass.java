@@ -7,8 +7,16 @@ import element.Pin;
 import info.Info;
 import info.InfoType;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
+/**
+ * This pass finds and removes elements whose one or more pins are not on any breadboards.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class UselessElementsPass extends Pass {
     public UselessElementsPass() {
         // Call parent constructor
@@ -18,7 +26,14 @@ public class UselessElementsPass extends Pass {
         // Set pre-requirements
     }
 
+    /**
+     * Find the breadboard in the given circuit.
+     *
+     * @param circuit Circuit to find breadboard in
+     * @return Pointer to the found breadboard. Return null if no breadboards are found
+     */
     private Breadboard findBreadboard(Circuit circuit) {
+        // TODO: 2023/3/17 find all breadboard instead of the first one
         Breadboard bd = null;
         for(Element e : circuit.getElementList()) {
             if(e.getType().equals("breadboard")) {

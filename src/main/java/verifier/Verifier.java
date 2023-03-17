@@ -7,6 +7,12 @@ import pass.Pass;
 
 import java.util.ArrayList;
 
+/**
+ * Manager of the whole verification process.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class Verifier {
     private Circuit example, target;
     private ArrayList<Info> output;
@@ -88,6 +94,8 @@ public class Verifier {
         } finally {
             this.output.addAll(pass.getOutput());
         }
+//        res = pass.execute(this.example, this.target, this.donePasses);
+//        if(res) this.donePasses.add(pass.getId());
         return res;
     }
 

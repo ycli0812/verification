@@ -8,6 +8,19 @@ import info.InfoType;
 
 import java.util.*;
 
+/**
+ * This pass checks if there are connections that can not be implemented in the real world in the circuit.
+ *
+ * <p>Here is the checking list:</p>
+ *
+ * <ul>
+ *     <li>Multiple pins in one holes</li>
+ *     <li>Still adding more...</li>
+ * </ul>
+ *
+ * @author Lyc
+ * @version 2023.02.18
+ */
 public class ImpossibleConnectionPass extends Pass{
     public ImpossibleConnectionPass() {
         super();

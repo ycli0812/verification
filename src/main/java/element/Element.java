@@ -3,12 +3,41 @@ package element;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract of element in the circuit, including wires.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public abstract class Element {
+    /**
+     * A given ID only used during the verification process.
+     */
     protected String id;
+
+    /**
+     * Original ID in the input circuit.
+     */
     protected String originId;
+
+    /**
+     * Pins of the element.
+     */
     protected ArrayList<Pin> pins;
+
+    /**
+     * Features of the element.
+     */
     protected ArrayList<Parameter> parameters;
+
+    /**
+     * X-axis coordinate of the element.
+     */
     protected int originX;
+
+    /**
+     * Y-axis coordinate of the element.
+     */
     protected int originY;
 
     public Element(String id, String originId, int originX, int originY, ArrayList<Parameter> features, ArrayList<Pin> pins) {
@@ -51,8 +80,15 @@ public abstract class Element {
     }
 
     public abstract String getType();
+
     public abstract Boolean compareConnection(Element e); // Should be overridden by extended classes
 
+    /**
+     * Parse parameter list and assign feature properties.
+     *
+     * <p>Specific element classes may have properties indicating element features. These properties should be
+     * initialized int this method based on {@code features}.</p>
+     */
     protected abstract void analyseFeatures();
 
     public int getOriginX() {

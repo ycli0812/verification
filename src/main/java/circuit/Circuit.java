@@ -9,6 +9,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import element.*;
 
+/**
+ * A breadboard circuit.
+ *
+ * @author Lyc
+ * @version 2023.02.06
+ */
 public class Circuit {
     private final ArrayList<Element> elementList;
 
@@ -21,6 +27,11 @@ public class Circuit {
         this.load(jsonStr);
     }
 
+    /**
+     * Parse a JSON string and push all the elements into {@code elementList}.
+     *
+     * @param jsonStr JSON string to be parsed
+     */
     public void load(String jsonStr) {
         ObjectMapper mapper = new ObjectMapper();
         // Map elementSet field to JsonNode instance
@@ -69,6 +80,10 @@ public class Circuit {
                     this.elementList.add(new Breadboard(String.valueOf(eCount), id, originX, originY, features, pins));
                     break;
                 }
+                case "wire": {
+                    this.elementList.add(new Wire(String.valueOf(eCount), id, originX, originY, features, pins));
+                    break;
+                }
                 default: break;
             }
         }
@@ -78,7 +93,14 @@ public class Circuit {
         return elementList;
     }
 
+    /**
+     * Get a certain element by ID.
+     *
+     * @param id ID of the required element
+     * @return The element found in the circuit, return null if there is not such an element
+     */
     public Element getElement(String id) {
+        // TODO: 2023/3/17 do find the element
         return null;
     }
 }
